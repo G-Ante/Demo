@@ -1,0 +1,76 @@
+package com.example;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+public class setEtaTest {
+
+    @Test
+    public void testSetEta_PositiveValue() {
+        // Given
+        Utente utente = new Utente("John", "Doe", "john.doe@example.com", "password", 25);
+
+        // When
+        utente.setEta(30);
+
+        // Then
+        assertEquals(30, utente.getEta());
+    }
+
+    @Test
+    public void testSetEta_NegativeValue() {
+        // Given
+        Utente utente = new Utente("John", "Doe", "john.doe@example.com", "password", 25);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        // When
+        utente.setEta(-20);
+
+        // Then
+        assertEquals("L'età deve essere un valore positivo.\n", outputStream.toString());
+    }
+
+    @Test
+    public void testSetEta_ZeroValue() {
+        // Given
+        Utente utente = new Utente("John", "Doe", "john.doe@example.com", "password", 25);
+
+        // When
+        utente.setEta(0);
+
+        // Then
+        assertEquals(0, utente.getEta());
+    }
+
+    @Test
+    public void testSetEta_NullValue() {
+        // Given
+        Utente utente = new Utente("John", "Doe", "john.doe@example.com", "password", 25);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        // When
+        utente.setEta(null);
+
+        // Then
+        assertEquals("L'età deve essere un valore positivo.\n", outputStream.toString());
+    }
+
+    @Test
+    public void testSetEta_WrongType() {
+        // Given
+        Utente utente = new Utente("John", "Doe", "john.doe@example.com", "password", 25);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        // When
+        utente.setEta("20");
+
+        // Then
+        assertEquals("L'età deve essere un valore positivo.\n", outputStream.toString());
+    }
+}
